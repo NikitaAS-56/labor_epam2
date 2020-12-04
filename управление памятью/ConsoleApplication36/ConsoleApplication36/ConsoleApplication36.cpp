@@ -38,9 +38,9 @@ int main() {
 	cout << &(massstudent[0].name) << endl<<endl;
 
 	cout << "размер занимаемой памяти  1 структурой" << endl;
-	cout << sizeof(stud);
+	cout << sizeof(stud[0]);
 	cout << endl;
-	cout << sizeof(stud1);
+	cout << sizeof(stud1[0]);
 	cout << endl;
 
 	cout<<"размер памяти занимаемый масивами студентов : " << sizeof(stud);
@@ -68,7 +68,7 @@ int main() {
 		
 	}
 
-	student* p = &stud[0];
-	cout << &p->group<<"   ";
-	cout << &p->Email;
+	student* p = stud;
+	cout << *&p <<" ";
+
 }   
