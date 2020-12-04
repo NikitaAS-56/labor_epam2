@@ -1,6 +1,6 @@
-п»ї#include <iostream>
+#pragma once
+#include<iostream>
 using namespace std;
-
 
 class STRING
 {
@@ -8,21 +8,21 @@ private:
     char* data;
     int  size;
 public:
-  
-    STRING():data(nullptr), size(0){
-        cout << "РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ";
+
+    STRING() :data(nullptr), size(0) {
+        cout << "конструктор без параметров";
     }
     STRING(const char* p)
     {
-        cout << "РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂРѕРј char* ";
+        cout << "конструктор с параметром char* ";
         size = strlen(p);
         data = new char[size];
         memcpy(data, p, size);
-       
+
     }
     STRING(const STRING& cop)
     {
-        cout << " РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ ";
+        cout << " конструктор копирования ";
         data = new char[size];
         copy(cop.data, cop.data + cop.size, data);
         size = cop.size;
@@ -30,8 +30,8 @@ public:
 
     STRING& operator=(const STRING& cop)
     {
-        cout << "РѕРїРµСЂР°С‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ =";
-       
+        cout << "оператор копирования =";
+
 
         delete[] data;
         data = new char[cop.size];
@@ -42,10 +42,10 @@ public:
 
     STRING(STRING&& perem)  noexcept
     {
-        cout << "РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ  РїРµСЂРµРјРµС€РµРЅРёСЏ \n";
+        cout << "конструктор  перемешения \n";
         data = perem.data;
         size = perem.size;
-      
+
         perem.size = 0;
         perem.data = nullptr;
 
@@ -53,38 +53,22 @@ public:
 
     STRING& operator=(STRING&& perem)   noexcept
     {
-        cout << "РѕРїРµСЂС‚РѕСЂ РїРµСЂРµРјРµС‰РµРЅРёСЏ =";
-     
-        delete[] data;        
-        data = perem.data;  
+        cout << "опертор перемещения =";
+
+        delete[] data;
+        data = perem.data;
         size = perem.size;
         perem.size = 0;
-        perem.data = nullptr; 
+        perem.data = nullptr;
         return *this;
     }
 
 
-   
-    ~STRING()                
+
+    ~STRING()
     {
         delete[] data;
     }
 
 
 };
-
-int main()
-{      
-   setlocale(0, "");
-
-   STRING H1;
-   cout << endl;
-   STRING STR2(" I");
-   cout << endl;
-   STRING STR3(STR2);
-   cout << endl;
-   STRING str4(std::move(STR2));
-   cout << endl;
- 
-   return 0;
-}
